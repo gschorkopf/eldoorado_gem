@@ -1,5 +1,5 @@
 Gem::Specification.new do |s|
-  s.name        = 'Eldoorado'
+  s.name        = 'Eldoorado Gem'
   s.version     = '0.0.0'
   s.date        = '2013-05-29'
   s.summary     = "Ruby wrapper gem for Eldoorado API"
