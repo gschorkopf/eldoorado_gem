@@ -1,0 +1,1 @@
+Ruby wrapper gem for Eldoorado API
