@@ -1,6 +1,8 @@
 module Eldoorado
   class Entrant
-    BASE_URL = "http://localhost:3000"
+    def self.base_url
+      "http://localhost:3000"
+    end
 
     def self.get_resource(url)
       RestClient.get url
@@ -11,11 +13,11 @@ module Eldoorado
     end
 
     def self.entrants_url
-      url = "#{BASE_URL}/entrants.json"
+      url = "#{base_url}/entrants.json"
     end
 
     def self.entrant_url(id)
-      "#{BASE_URL}/entrants/#{id}.json"
+      "#{base_url}/entrants/#{id}.json"
     end
 
     def self.all

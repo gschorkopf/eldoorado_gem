@@ -1,0 +1,5 @@
+## Ignore simplecov results
+/coverage
+
+## Ignore VCR cassettes
+/fixtures
