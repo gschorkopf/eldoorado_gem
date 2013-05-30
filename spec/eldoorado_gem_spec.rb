@@ -1,0 +1,3 @@
+require 'vcr'
+require 'rspec'
+
