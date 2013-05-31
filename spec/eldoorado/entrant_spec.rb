@@ -37,6 +37,16 @@ describe Eldoorado::Entrant do
     end
   end
 
+  describe ".company" do
+    it "returns the company associated with that entrant" do
+      VCR.use_cassette('return_entrant_company') do
+        result = subject.find(1)
+        expect(result.id).to eq 1
+        expect(result.company).to eq "Roximity"
+      end
+    end
+  end
+
   describe ".badge_scans" do
     xit "returns the badge scans associated with that entrant" do
       VCR.use_cassette('return_entrant_scans') do

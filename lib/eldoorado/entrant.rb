@@ -46,11 +46,8 @@ module Eldoorado
       entrant.first_name  = data['first_name']
       entrant.last_name   = data['last_name']
       entrant.guest       = data['guest']
-      entrant.company_id  = data['company_id']
       entrant.access_type = data['access_type']
-
-      # entrant.badge_scans = BadgeScan.assign_multiple_from_json(data['badge_scans'])
-      # entrant.company     = Company.assign_params_from_json(data['company'])
+      entrant.company     = Company.find(data['company_id']).name
 
       entrant
     end
