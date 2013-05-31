@@ -27,7 +27,7 @@ module Eldoorado
 
       badge_scan.entrant_id = data['entrant_id']
       badge_scan.scan_time  = data['scan_time']
-      badge_scan.door_id    = data['door']
+      badge_scan.door_id    = data['door_id']
 
       badge_scan
     end
