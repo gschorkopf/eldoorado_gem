@@ -1,15 +1,7 @@
 module Eldoorado
   class Entrant
-    def self.get_resource(url)
-      RestClient.get url
-    end
-
-    def self.post_resource(url, params)
-      RestClient.post url, entrant: params
-    end
-
     def self.entrants_url
-      url = "#{BASE_URL}/entrants.json"
+      "#{BASE_URL}/entrants.json"
     end
 
     def self.entrant_url(id)
@@ -17,7 +9,7 @@ module Eldoorado
     end
 
     def self.all
-      response = get_resource(entrants_url)
+      response = Server.get_resource(entrants_url)
       json = JSON.parse response
 
       json.each_with_object([]) do |data, entrants|
@@ -27,14 +19,14 @@ module Eldoorado
     end
 
     def self.find(id)
-      response = get_resource(entrant_url(id))
+      response = Server.get_resource(entrant_url(id))
       json = JSON.parse response
 
       assign_params_from_json(json)
     end
 
     def self.create(params)
-      response = post_resource(entrants_url, params)
+      response = Server.post_resource(entrants_url, params)
       json = JSON.parse response
 
       assign_params_from_json(json)
@@ -48,6 +40,7 @@ module Eldoorado
       entrant.guest       = data['guest']
       entrant.access_type = data['access_type']
       entrant.company     = Company.find(data['company_id']).name
+      entrant.badge_scans = BadgeScan.find_all_for_entrant(data['id'].to_i)
 
       entrant
     end

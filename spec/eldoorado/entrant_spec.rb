@@ -48,12 +48,12 @@ describe Eldoorado::Entrant do
   end
 
   describe ".badge_scans" do
-    xit "returns the badge scans associated with that entrant" do
+    it "returns the badge scans associated with that entrant" do
       VCR.use_cassette('return_entrant_scans') do
         result = subject.find(1)
         expect(result.id).to eq 1
         (result.badge_scans.count).should be > 1
-        expect(result.badge_scans.first.entrant_id).to eq result.entrant_id 
+        expect(result.badge_scans.first.entrant_id).to eq result.id 
       end
     end
   end
