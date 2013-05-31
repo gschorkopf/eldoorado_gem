@@ -53,7 +53,7 @@ describe Eldoorado::Entrant do
         result = subject.find(1)
         expect(result.id).to eq 1
         (result.badge_scans.count).should be > 1
-        expect(result.badge_scans.first.entrant_id).to eq result.id 
+        expect(result.badge_scans.first.entrant_first_name).to eq result.first_name
       end
     end
   end

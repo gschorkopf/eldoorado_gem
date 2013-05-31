@@ -12,10 +12,7 @@ module Eldoorado
       response = Server.get_resource(entrants_url)
       json = JSON.parse response
 
-      json.each_with_object([]) do |data, entrants|
-        entrant = assign_params_from_json(data)
-        entrants << entrant
-      end
+      assign_multiple_from_json(json)
     end
 
     def self.find(id)
@@ -32,15 +29,23 @@ module Eldoorado
       assign_params_from_json(json)
     end
 
+    def self.assign_multiple_from_json(json)
+      json.each_with_object([]) do |data, entrants|
+        entrant = assign_params_from_json(data)
+        entrants << entrant
+      end
+    end
+
     def self.assign_params_from_json(data)
       entrant = Hashie::Mash.new
+
       entrant.id          = data['id'].to_i
       entrant.first_name  = data['first_name']
       entrant.last_name   = data['last_name']
       entrant.guest       = data['guest']
       entrant.access_type = data['access_type']
-      entrant.company     = Company.find(data['company_id']).name
-      entrant.badge_scans = BadgeScan.find_all_for_entrant(data['id'].to_i)
+      entrant.company     = data['company']['name']
+      entrant.badge_scans = data['badge_scans']
 
       entrant
     end
