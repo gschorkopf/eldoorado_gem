@@ -4,10 +4,6 @@ module Eldoorado
       "#{BASE_URL}/badge_scans.json"
     end
 
-    def self.badge_url(id)
-      "#{BASE_URL}/badge_scans/#{id}.json"
-    end
-
     def self.all
       response = Server.get_resource(badges_url)
       json = JSON.parse response
