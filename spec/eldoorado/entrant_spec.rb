@@ -3,19 +3,11 @@ require 'spec_helper'
 describe Eldoorado::Entrant do 
   let!(:subject){Eldoorado::Entrant}
 
-  describe ".entrants_url" do
-    xit "returns the get/post url for entrants" do
-      stub(subject.base_url).and_return("http://www.eldoorado.com")
-      url = subject.entrants_url
-      expect(url).to eq "http://www.eldoorado.com/entrants.json"
-    end
-  end
-
   describe ".find" do
     it "returns a hash of found entrant" do
       VCR.use_cassette('found_entrant') do
         result = subject.find(1)
-        expect(result.entrant_id).to eq 1
+        expect(result.id).to eq 1
         expect(result.first_name).to eq "Paul"
       end
     end
@@ -41,6 +33,17 @@ describe Eldoorado::Entrant do
         result = subject.create(params)
         expect(result.first_name).to eq "Geoff"
         expect(result.last_name).to eq "Schorkopf"
+      end
+    end
+  end
+
+  describe ".badge_scans" do
+    xit "returns the badge scans associated with that entrant" do
+      VCR.use_cassette('return_entrant_scans') do
+        result = subject.find(1)
+        expect(result.id).to eq 1
+        (result.badge_scans.count).should be > 1
+        expect(result.badge_scans.first.entrant_id).to eq result.entrant_id 
       end
     end
   end

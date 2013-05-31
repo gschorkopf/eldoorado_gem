@@ -1,9 +1,5 @@
 module Eldoorado
   class Entrant
-    def self.base_url
-      "http://localhost:3000"
-    end
-
     def self.get_resource(url)
       RestClient.get url
     end
@@ -13,11 +9,11 @@ module Eldoorado
     end
 
     def self.entrants_url
-      url = "#{base_url}/entrants.json"
+      url = "#{BASE_URL}/entrants.json"
     end
 
     def self.entrant_url(id)
-      "#{base_url}/entrants/#{id}.json"
+      "#{BASE_URL}/entrants/#{id}.json"
     end
 
     def self.all
@@ -34,7 +30,6 @@ module Eldoorado
       response = get_resource(entrant_url(id))
       json = JSON.parse response
 
-      # How to account for 404 errors?
       assign_params_from_json(json)
     end
 
@@ -47,12 +42,16 @@ module Eldoorado
 
     def self.assign_params_from_json(data)
       entrant = Hashie::Mash.new
-      entrant.entrant_id  = data['id'].to_i
+      entrant.id          = data['id'].to_i
       entrant.first_name  = data['first_name']
       entrant.last_name   = data['last_name']
       entrant.guest       = data['guest']
       entrant.company_id  = data['company_id']
       entrant.access_type = data['access_type']
+
+      # entrant.badge_scans = BadgeScan.assign_multiple_from_json(data['badge_scans'])
+      # entrant.company     = Company.assign_params_from_json(data['company'])
+
       entrant
     end
   end
