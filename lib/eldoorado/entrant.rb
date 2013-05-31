@@ -23,7 +23,7 @@ module Eldoorado
     end
 
     def self.create(params)
-      response = Server.post_resource(entrants_url, params)
+      response = Server.post_resource(entrants_url, {entrant: params})
       json = JSON.parse response
 
       assign_params_from_json(json)

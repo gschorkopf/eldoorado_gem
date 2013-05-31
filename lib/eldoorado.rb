@@ -15,8 +15,8 @@ module Eldoorado
       RestClient.get url
     end
 
-    def self.post_resource(url, params)
-      RestClient.post url, entrant: params
+    def self.post_resource(url, params = {})
+      RestClient.post url, params
     end
   end
 end

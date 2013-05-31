@@ -3,6 +3,8 @@ require 'spec_helper'
 describe Eldoorado::BadgeScan do 
   let!(:subject){Eldoorado::BadgeScan}
 
+  describe '.find_by_door'
+
   describe '.all' do
     it "returns all found badge scans" do
       VCR.use_cassette('all_scans') do
@@ -15,4 +17,5 @@ describe Eldoorado::BadgeScan do
   end
 
   describe '.create'
+  # What inputs should this take?
 end
