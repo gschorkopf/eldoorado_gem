@@ -47,6 +47,10 @@ module Eldoorado
 
       company.id   = data['id'].to_i
       company.name = data['name']
+      company.entrants = Entrant.assign_multiple_from_json(data['entrants'], {badge_scans: :none})
+      company.badge_scans = data['entrants'].each_with_object([]) do |entrant, scans|
+        scans << BadgeScan.assign_multiple_from_json(entrant['badge_scans'])
+      end.flatten
 
       company
     end

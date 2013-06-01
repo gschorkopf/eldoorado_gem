@@ -41,6 +41,22 @@ describe Eldoorado::Company do
     end
   end
 
-  describe '.badge_scans'
+  describe '.entrants' do
+    it "returns all entrants for the company" do
+      VCR.use_cassette('company_entrants') do
+        result = described_class.find(1)
+        expect(result.entrants.first.first_name).to eq "Paul"
+      end
+    end
+  end
 
+  describe '.badge_scans' do
+    it "returns all badge scans for the company" do
+      VCR.use_cassette('company_badge_scans') do
+        result = described_class.find(1)
+        (result.badge_scans.count).should be > 1
+        expect(result.badge_scans.first.door).to eq "Atrium Door (In)"
+      end
+    end
+  end
 end

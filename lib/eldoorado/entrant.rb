@@ -29,14 +29,14 @@ module Eldoorado
       assign_params_from_json(json)
     end
 
-    def self.assign_multiple_from_json(json)
+    def self.assign_multiple_from_json(json, options={})
       json.each_with_object([]) do |data, entrants|
-        entrant = assign_params_from_json(data)
+        entrant = assign_params_from_json(data, options)
         entrants << entrant
       end
     end
 
-    def self.assign_params_from_json(data)
+    def self.assign_params_from_json(data, options={})
       entrant = Hashie::Mash.new
 
       entrant.id          = data['id'].to_i
@@ -45,7 +45,7 @@ module Eldoorado
       entrant.guest       = data['guest']
       entrant.access_type = data['access_type']
       entrant.company     = data['company']
-      entrant.badge_scans = data['badge_scans']
+      entrant.badge_scans = data['badge_scans'] unless options[:badge_scans] == :none
 
       entrant
     end
