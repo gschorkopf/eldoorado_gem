@@ -60,7 +60,7 @@ describe Eldoorado::Entrant do
       VCR.use_cassette('return_entrant_scans') do
         result = described_class.find(1)
         expect(result.id).to eq 1
-        (result.badge_scans.count).should be > 1
+        (result.badge_scans.count).should be >= 1
         expect(result.badge_scans.first.entrant_id).to eq result.id
       end
     end

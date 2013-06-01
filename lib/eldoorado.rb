@@ -8,7 +8,7 @@ require 'eldoorado/door'
 
 
 module Eldoorado
-  BASE_URL = "http://localhost:3000"
+  BASE_URL = "http://eldoorado-api.herokuapp.com"
 
   class Server
     def self.get_resource(url)
