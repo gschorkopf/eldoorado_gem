@@ -44,7 +44,7 @@ module Eldoorado
       entrant.last_name   = data['last_name']
       entrant.guest       = data['guest']
       entrant.access_type = data['access_type']
-      entrant.company     = data['company']['name']
+      entrant.company     = data['company']
       entrant.badge_scans = data['badge_scans']
 
       entrant
