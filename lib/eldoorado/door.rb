@@ -10,8 +10,11 @@ module Eldoorado
 
     def self.find(id)
       response = Server.get_resource(door_url(id))
-      json = JSON.parse response
+      handle_json response
+    end
 
+    def self.handle_json(response)
+      json = JSON.parse response
       assign_params_from_json(json)
     end
 

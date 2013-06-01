@@ -11,6 +11,13 @@ module Eldoorado
       assign_multiple_from_json(json)
     end
 
+    def self.create(params)
+      response = Server.post_resource(badges_url, {badge_scan: params})
+      json = JSON.parse response
+
+      assign_params_from_json(json)
+    end
+
     def self.assign_multiple_from_json(json)
       json.each_with_object([]) do |data, badge_scans|
         badge_scan = assign_params_from_json(data)

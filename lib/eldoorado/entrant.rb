@@ -17,15 +17,22 @@ module Eldoorado
 
     def self.find(id)
       response = Server.get_resource(entrant_url(id))
-      json = JSON.parse response
+      handle_json response
+    end
 
-      assign_params_from_json(json)
+    def self.find_by_name(first_name, last_name)
+      params = "#{first_name.capitalize},#{last_name.capitalize}"
+      response = Server.get_resource(entrant_url(params))
+      handle_json response
     end
 
     def self.create(params)
       response = Server.post_resource(entrants_url, {entrant: params})
-      json = JSON.parse response
+      handle_json response
+    end
 
+    def self.handle_json(response)
+      json = JSON.parse response
       assign_params_from_json(json)
     end
 

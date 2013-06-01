@@ -11,8 +11,6 @@ describe Eldoorado::Door do
     end
   end
 
-  describe '.find_by_location'
-
   describe ".create" do
     it "returns the created entrant" do
       VCR.use_cassette('create_door') do

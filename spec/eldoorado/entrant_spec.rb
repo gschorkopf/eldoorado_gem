@@ -11,6 +11,16 @@ describe Eldoorado::Entrant do
     end
   end
 
+  describe ".find_by_name" do
+    it "returns a hash of found entrant, case insensitive" do
+      VCR.use_cassette('found_entrant_by_name') do
+        result = described_class.find_by_name("paul", "finkel")
+        expect(result.id).to eq 1
+        expect(result.first_name).to eq "Paul"
+      end
+    end
+  end
+
   describe ".all" do
     it "returns all found entrants" do
       VCR.use_cassette('all_entrant') do
