@@ -7,7 +7,7 @@ describe Eldoorado::BadgeScan do
         results = described_class.all
         (results.count).should be > 1
         expect(results.first.door).to eq "Atrium Door (In)"
-        expect(results.first.entrant_id).to eq 1
+        expect(results.first.first_name).to eq "Paul"
       end
     end
   end
@@ -22,7 +22,7 @@ describe Eldoorado::BadgeScan do
         }
         result = described_class.create(params)
         expect(result.door).to eq "Atrium Door (In)"
-        expect(result.entrant_id).to eq 1
+        expect(result.first_name).to eq "Paul"
       end
     end
   end

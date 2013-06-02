@@ -28,7 +28,10 @@ module Eldoorado
     def self.assign_params_from_json(data)
       badge_scan = Hashie::Mash.new
 
-      badge_scan.entrant_id   = data['entrant_id']     
+      badge_scan.last_name    = data['last_name']
+      badge_scan.first_name   = data['first_name'] 
+      badge_scan.guest        = data['guest']
+      badge_scan.company      = data['company']
       badge_scan.scan_time    = data['scan_time']
       badge_scan.door         = data['door']
 
